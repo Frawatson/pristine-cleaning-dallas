@@ -927,34 +927,106 @@
     .nav-links { display: none; }
     .hero-content { padding: 0 36px; }
     .hero-stats { right: 36px; }
-    .services, .process, .testimonials, .pricing, .cta-section, .careers { padding: 80px 36px; }
+    .services, .process, .testimonials, .pricing, .cta-section, .careers { padding: 70px 28px; }
     .services-grid, .testimonials-grid, .pricing-grid, .careers-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
-    .process-grid { grid-template-columns: 1fr; gap: 50px; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .process-grid { grid-template-columns: 1fr; gap: 40px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
     .section-desc { text-align: left; }
-    .pricing-card.featured { margin: 0; padding: 50px 40px; }
+    .service-card { padding: 36px 28px; }
+    .pricing-card { padding: 36px 28px; }
+    .pricing-card.featured { margin: 0; padding: 36px 28px; }
+    .testimonial-card { padding: 32px 28px; }
+    .testimonials-grid { margin-top: 40px; }
+    .pricing-grid { margin-top: 40px; }
+    .careers-grid { margin-top: 40px; }
+    .job-card { padding: 32px 28px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-    footer { padding: 60px 36px 36px; }
+    footer { padding: 50px 28px 30px; }
   }
 
   @media (max-width: 640px) {
-    nav { padding: 20px 20px; }
-    nav.scrolled { padding: 14px 20px; }
-    .nav-logo { font-size: 1.1rem; letter-spacing: 0.08em; }
+    /* Nav */
+    nav { padding: 16px 16px; }
+    nav.scrolled { padding: 12px 16px; }
+    .nav-logo { font-size: 1.05rem; letter-spacing: 0.06em; }
     .nav-cta { display: none; }
-    .hero-content { padding: 0 20px; }
-    .hero-stats { position: static; display: flex; gap: 24px; padding: 40px 20px 0; flex-wrap: wrap; }
+
+    /* Hero */
+    .hero { min-height: auto; padding: 100px 0 60px; }
+    .hero-content { padding: 0 16px; }
+    .hero-eyebrow { margin-bottom: 20px; }
+    .hero-eyebrow-line { width: 30px; }
+    .hero h1 { margin-bottom: 20px; }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 32px; line-height: 1.65; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .btn-primary { padding: 14px 32px; font-size: 0.78rem; }
+    .hero-stats { position: static; display: flex; gap: 20px; padding: 32px 16px 0; flex-wrap: wrap; }
+    .stat-num { font-size: 2rem; }
+    .stat-num span { font-size: 1.3rem; }
+    .stat-label { font-size: 0.65rem; }
     .hero-scroll { display: none; }
-    .services, .process, .testimonials, .pricing, .cta-section, .careers { padding: 60px 20px; }
+
+    /* Sections — tighter padding */
+    .services, .process, .testimonials, .pricing, .cta-section, .careers { padding: 48px 16px; }
+
+    /* Section headers */
+    .section-header { margin-bottom: 32px; gap: 12px; }
+    .section-desc { font-size: 0.85rem; line-height: 1.65; }
+
+    /* Service cards */
     .services-grid, .testimonials-grid, .pricing-grid, .careers-grid { grid-template-columns: 1fr; }
-    .process-grid { gap: 36px; }
-    .hero-actions { flex-direction: column; align-items: flex-start; }
-    .cta-actions { flex-direction: column; }
-    .footer-top { grid-template-columns: 1fr; gap: 32px; }
-    footer { padding: 50px 20px 28px; }
+    .services-grid { gap: 1px; }
+    .service-card { padding: 28px 24px; }
+    .service-num { font-size: 3.5rem; top: 14px; right: 18px; }
+    .service-icon { font-size: 1.6rem; margin-bottom: 16px; }
+    .service-title { font-size: 1.4rem; margin-bottom: 10px; }
+    .service-desc { font-size: 0.82rem; }
+    .service-features { margin-top: 16px; gap: 6px; }
+    .service-features li { font-size: 0.75rem; }
+
+    /* Process */
+    .process-grid { gap: 28px; }
+    .process-intro { font-size: 0.85rem; margin-top: 16px; }
+    .step { padding: 22px 0; gap: 18px; }
+    .step-num-wrap { width: 42px; height: 42px; }
+    .step-num { font-size: 1.1rem; }
+    .step-title { font-size: 1.15rem; margin-bottom: 6px; }
+    .step-desc { font-size: 0.8rem; }
+
+    /* Pricing */
+    .pricing-grid { margin-top: 32px; }
+    .pricing-card { padding: 28px 24px; }
+    .pricing-card.featured { padding: 28px 24px; }
+    .plan-badge { margin-bottom: 20px; }
+    .plan-name { font-size: 1.6rem; }
+    .price-num { font-size: 2.5rem; }
+    .plan-price { margin: 16px 0; }
+    .plan-features { margin: 20px 0 24px; gap: 10px; }
+    .plan-features li { font-size: 0.82rem; }
+
+    /* Testimonials */
+    .testimonials-grid { margin-top: 32px; gap: 12px; }
+    .testimonial-card { padding: 28px 24px; }
+    .testimonial-quote { font-size: 2.8rem; margin-bottom: 16px; }
+    .testimonial-text { font-size: 1.05rem; margin-bottom: 22px; }
+    .stars { top: 28px; right: 24px; }
+
+    /* Careers */
+    .careers-grid { margin-top: 32px; }
+    .job-card { padding: 28px 24px; }
+    .job-title { font-size: 1.35rem; margin-bottom: 10px; }
+    .job-desc { font-size: 0.82rem; margin-bottom: 20px; }
+    .job-perks { margin-bottom: 22px; }
+
+    /* CTA */
+    .cta-desc { font-size: 0.9rem; margin: 0 auto 32px; }
+    .cta-actions { flex-direction: column; gap: 14px; }
+
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-brand { font-size: 1.3rem; }
+    footer { padding: 40px 16px 24px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-    .stat-num { font-size: 2.2rem; }
-    .price-num { font-size: 2.8rem; }
   }
 
   @media (hover: none) {
