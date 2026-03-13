@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Review Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #07112B;
+    --gold: #C9A84C;
+    --gold-light: #E8CC85;
+    --cream: #F8F5EE;
+    --white: #FFFFFF;
+    --gray: #8A8F9E;
+    --light: #EEF0F6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+    display: none;
+  }
+  .admin-header {
+    background: var(--navy);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .admin-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: var(--white);
+  }
+  .admin-header span {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 700px) {
+    .container { grid-template-columns: 1fr; }
+  }
+  .panel {
+    background: var(--white);
+    padding: 36px 32px;
+  }
+  .panel h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    color: var(--navy);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .field label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .field input, .field textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--navy);
+    padding: 10px 14px;
+    border: 1px solid rgba(7,17,43,0.15);
+    background: var(--light);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .field input:focus, .field textarea:focus {
+    border-color: var(--gold);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+
+  /* Preview card */
+  .preview-card {
+    background: var(--white);
+    padding: 44px 38px;
+    position: relative;
+    border: 1px solid rgba(7,17,43,0.08);
+    margin-bottom: 20px;
+  }
+  .preview-card .stars {
+    position: absolute;
+    top: 44px; right: 38px;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+  }
+  .preview-card .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 0.5;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .preview-card .text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .preview-card .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .preview-card .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+  .preview-card .author-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .preview-card .author-location {
+    font-size: 0.78rem;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  /* Code output */
+  .code-output {
+    background: var(--navy);
+    color: rgba(255,255,255,0.7);
+    padding: 20px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+  }
+  .btn-copy {
+    width: 100%;
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(7,17,43,0.2);
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-copy:hover { background: var(--navy); color: var(--white); }
+  .btn-copy.copied { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="admin-header">
+  <h1>Pristine Cleaning Dallas</h1>
+  <span>Review Generator</span>
+</div>
+
+<div class="container">
+  <div class="panel">
+    <h2>Compose Review</h2>
+    <div class="field">
+      <label>Client Name</label>
+      <input type="text" id="r-name" placeholder="Sarah M.">
+    </div>
+    <div class="field">
+      <label>Initials (for avatar)</label>
+      <input type="text" id="r-initials" placeholder="SM" maxlength="3">
+    </div>
+    <div class="field">
+      <label>Location / Role</label>
+      <input type="text" id="r-location" placeholder="Residential Client · Dallas, TX">
+    </div>
+    <div class="field">
+      <label>Review Text</label>
+      <textarea id="r-text" placeholder="Write the customer's review here..."></textarea>
+    </div>
+    <button class="btn" onclick="generateReview()">Generate Card</button>
+  </div>
+
+  <div class="panel">
+    <h2>Preview</h2>
+    <div id="preview"></div>
+    <div id="output-section" style="display:none">
+      <div class="code-output" id="code-output"></div>
+      <button class="btn-copy" id="btn-copy" onclick="copyCode()">Copy HTML</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Password gate
+  const pwd = prompt('Enter admin password:');
+  if (pwd !== 'pristine2024') {
+    document.body.innerHTML = '<p style="padding:60px;text-align:center;font-family:sans-serif;color:#8A8F9E">Access denied.</p>';
+    document.body.style.display = 'block';
+  } else {
+    document.body.style.display = 'block';
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function generateReview() {
+    const name = document.getElementById('r-name').value.trim();
+    const initials = document.getElementById('r-initials').value.trim();
+    const location = document.getElementById('r-location').value.trim();
+    const text = document.getElementById('r-text').value.trim();
+
+    if (!name || !initials || !text) {
+      alert('Please fill in name, initials, and review text.');
+      return;
+    }
+
+    // Render preview
+    document.getElementById('preview').innerHTML = `
+      <div class="preview-card">
+        <div class="stars">\u2605\u2605\u2605\u2605\u2605</div>
+        <span class="quote">\u201C</span>
+        <p class="text">${escapeHtml(text)}</p>
+        <div class="author">
+          <div class="avatar">${escapeHtml(initials)}</div>
+          <div>
+            <div class="author-name">${escapeHtml(name)}</div>
+            <div class="author-location">${escapeHtml(location)}</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Generate HTML snippet
+    const html = `    <div class="testimonial-card">
+      <div class="stars">\u2605\u2605\u2605\u2605\u2605</div>
+      <span class="testimonial-quote">\u201C</span>
+      <p class="testimonial-text">${escapeHtml(text)}</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">${escapeHtml(initials)}</div>
+        <div>
+          <div class="author-name">${escapeHtml(name)}</div>
+          <div class="author-location">${escapeHtml(location)}</div>
+        </div>
+      </div>
+    </div>`;
+
+    document.getElementById('code-output').textContent = html;
+    document.getElementById('output-section').style.display = 'block';
+    document.getElementById('btn-copy').textContent = 'Copy HTML';
+    document.getElementById('btn-copy').classList.remove('copied');
+  }
+
+  function copyCode() {
+    const code = document.getElementById('code-output').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('btn-copy');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+    });
+  }
+</script>
+</body>
+</html>
