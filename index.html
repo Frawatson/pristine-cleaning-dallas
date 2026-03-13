@@ -673,6 +673,110 @@
   .btn-plan:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
   .pricing-card.featured .btn-plan:hover { background: var(--gold-light); border-color: var(--gold-light); }
 
+  /* BOOKING FORM */
+  .booking {
+    padding: 120px 60px;
+    background: var(--cream);
+  }
+  .booking-form {
+    max-width: 720px;
+    margin: 70px auto 0;
+    background: var(--white);
+    padding: 50px 44px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-group.full-width {
+    grid-column: 1 / -1;
+  }
+  .form-group label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--navy);
+    padding: 12px 16px;
+    border: 1px solid rgba(7,17,43,0.15);
+    background: var(--light);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A8F9E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .btn-submit {
+    grid-column: 1 / -1;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .form-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 14px;
+    display: none;
+  }
+  .form-message.success {
+    display: block;
+    color: #2e7d32;
+    background: rgba(46,125,50,0.08);
+  }
+  .form-message.error {
+    display: block;
+    color: #c62828;
+    background: rgba(198,40,40,0.08);
+  }
+
   /* CTA */
   .cta-section {
     padding: 120px 60px;
@@ -969,7 +1073,9 @@
     .hero-scroll { display: none; }
 
     /* Sections — tighter padding */
-    .services, .process, .testimonials, .pricing, .cta-section, .careers { padding: 48px 16px; }
+    .services, .process, .testimonials, .pricing, .cta-section, .careers, .booking { padding: 48px 16px; }
+    .booking-form { padding: 28px 20px; margin-top: 32px; }
+    .form-grid { grid-template-columns: 1fr; gap: 18px; }
 
     /* Section headers */
     .section-header { margin-bottom: 32px; gap: 12px; }
@@ -1082,7 +1188,7 @@
     <h1>A space that <br>breathes <em>pristine</em> <br>clarity.</h1>
     <p class="hero-sub">We transform homes and offices into immaculate sanctuaries — with professional-grade care, eco-conscious products, and meticulous attention to every surface.</p>
     <div class="hero-actions">
-      <a href="#pricing" class="btn-primary">Get a Free Quote</a>
+      <a href="#booking" class="btn-primary">Get a Free Quote</a>
       <a href="#services" class="btn-ghost">Our Services <span class="btn-ghost-arrow">→</span></a>
     </div>
   </div>
@@ -1272,7 +1378,7 @@
         <li>Surface dusting</li>
         <li>Bi-weekly scheduling</li>
       </ul>
-      <a href="tel:+14849359316" class="btn-plan">Get Started</a>
+      <a href="#booking" class="btn-plan">Get Started</a>
     </div>
 
     <div class="pricing-card featured">
@@ -1290,7 +1396,7 @@
         <li>Weekly scheduling</li>
         <li>Priority booking</li>
       </ul>
-      <a href="tel:+14849359316" class="btn-plan">Book Premium</a>
+      <a href="#booking" class="btn-plan">Book Premium</a>
     </div>
 
     <div class="pricing-card">
@@ -1307,8 +1413,70 @@
         <li>24/7 scheduling access</li>
         <li>Quarterly deep clean free</li>
       </ul>
-      <a href="tel:+14849359316" class="btn-plan">Contact Us</a>
+      <a href="#booking" class="btn-plan">Contact Us</a>
     </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="booking" id="booking">
+  <div style="text-align:center">
+    <div class="section-tag" style="justify-content:center">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Book a Cleaning</span>
+    </div>
+    <h2 class="section-title" style="text-align:center">Request your<br><em>free quote.</em></h2>
+  </div>
+
+  <div class="booking-form">
+    <form id="intake-form" class="form-grid" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="f2b8998b-564e-4cb0-bd4c-dea392b461fe">
+      <input type="hidden" name="subject" value="New Booking Request — Pristine Cleaning Dallas">
+      <input type="hidden" name="from_name" value="Intake_Form">
+
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label for="address">Address *</label>
+        <input type="text" id="address" name="address" required placeholder="123 Main St, Dallas, TX">
+      </div>
+      <div class="form-group">
+        <label for="service">Service Type</label>
+        <select id="service" name="service">
+          <option value="Essential">Essential — $89/visit</option>
+          <option value="Premium" selected>Premium — $149/visit</option>
+          <option value="Elite">Elite — Custom</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date" name="date">
+      </div>
+      <div class="form-group">
+        <label for="time">Preferred Time</label>
+        <select id="time" name="time">
+          <option value="Morning">Morning (8am – 12pm)</option>
+          <option value="Afternoon">Afternoon (12pm – 4pm)</option>
+          <option value="Evening">Evening (4pm – 7pm)</option>
+        </select>
+      </div>
+      <div class="form-group full-width">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" placeholder="Any special requests or details about your space..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Request Free Quote</button>
+      <div class="form-message" id="form-message"></div>
+    </form>
   </div>
 </section>
 
@@ -1525,6 +1693,38 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.services-grid, .testimonials-grid, .pricing-grid, .steps, .careers-grid').forEach(el => observer.observe(el));
+
+  // Intake form submission
+  const intakeForm = document.getElementById('intake-form');
+  const formMessage = document.getElementById('form-message');
+  intakeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = intakeForm.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    formMessage.className = 'form-message';
+    formMessage.style.display = 'none';
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(intakeForm)
+      });
+      const data = await res.json();
+      if (data.success) {
+        formMessage.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+        formMessage.className = 'form-message success';
+        intakeForm.reset();
+      } else {
+        formMessage.textContent = 'Something went wrong. Please call us at (484) 935-9316.';
+        formMessage.className = 'form-message error';
+      }
+    } catch {
+      formMessage.textContent = 'Something went wrong. Please call us at (484) 935-9316.';
+      formMessage.className = 'form-message error';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Request Free Quote';
+  });
 </script>
 </body>
 </html>
