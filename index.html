@@ -973,11 +973,6 @@
     background-position: right 16px center;
     padding-right: 40px;
   }
-  .form-group input[type="file"] {
-    padding: 10px 12px;
-    cursor: pointer;
-    font-size: 0.82rem;
-  }
   .form-hint {
     font-size: 0.74rem;
     color: var(--gray);
@@ -1981,11 +1976,10 @@
   </div>
 
   <div class="booking-form">
-    <form id="intake-form" class="form-grid" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+    <form id="intake-form" class="form-grid" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="f2b8998b-564e-4cb0-bd4c-dea392b461fe">
       <input type="hidden" name="subject" value="New Booking Request — Pristine Cleaning Dallas">
       <input type="hidden" name="from_name" value="Intake_Form">
-      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
 
       <div class="form-group full-width">
         <label for="name">Full Name *</label>
@@ -2085,9 +2079,8 @@
         </select>
       </div>
       <div class="form-group full-width">
-        <label for="photos">Photos (optional)</label>
-        <input type="file" id="photos" name="attachment" accept="image/*" multiple>
-        <span class="form-hint">Upload photos of the space for a more accurate quote. JPG or PNG, up to 10 MB total.</span>
+        <label>Photos (optional)</label>
+        <span class="form-hint">Want a more accurate quote? After submitting, email photos of the space to <a href="mailto:hello@pristineclean.work?subject=Photos%20for%20my%20quote" style="color:var(--navy);text-decoration:underline">hello@pristineclean.work</a> and we'll match them to your request.</span>
       </div>
       <div class="form-group full-width">
         <label for="notes">Notes</label>
@@ -2489,9 +2482,11 @@
     formMessage.className = 'form-message';
     formMessage.style.display = 'none';
     try {
+      const payload = Object.fromEntries(new FormData(intakeForm));
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(intakeForm)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       });
       const data = await res.json();
       if (data.success) {
